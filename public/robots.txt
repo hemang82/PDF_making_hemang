@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://pdfmaking.vercel.app/
+
+# Sitemaps
+Sitemap: https://pdfmaking.vercel.app/sitemap.xml
