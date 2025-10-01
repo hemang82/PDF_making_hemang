@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function WebViewer({
   heading,
   buttonLabel,
+  description,
   accept,
   multiple,
   isCheckPdfPasswordProtected,
@@ -398,11 +399,11 @@ export default function WebViewer({
           fileCount={uploadedFiles.length}
         >
           <p className='text-brand-slate-600 font-inter rounded-[10px] bg-white p-[21px] text-base/[23px] font-normal'>
-            Combine PDFs in the order you want with the easiest PDF merger available.
+            {description}
           </p>
-          {uploadedFiles.length < 2 && (
+          {/* {uploadedFiles.length < 2 && (
             <p className='mt-5 text-center text-sm text-white/80'>Select at least 2 PDF files to merge</p>
-          )}
+          )} */}
         </ActionSidebar>
       </div>
     </>

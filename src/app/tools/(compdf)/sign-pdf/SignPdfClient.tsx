@@ -37,6 +37,7 @@ const PREVIEW_SCREEN_PROPS = Object.freeze({
   fileNameAddOn: 'Sign',
   tool: 'Sign',
   toolName: 'Sign PDF',
+  description: 'Add your digital signature to PDF documents securely.',
 });
 
 const DOWNLOAD_SCREEN_PROPS = Object.freeze({

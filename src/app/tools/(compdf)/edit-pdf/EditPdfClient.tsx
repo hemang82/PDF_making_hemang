@@ -35,6 +35,7 @@ const PREVIEW_SCREEN_PROPS = Object.freeze({
   fileNameAddOn: 'edit',
   tool: 'Edit',
   toolName: 'Edit PDF',
+  description: 'Edit PDF by adding text, shapes, comments and highlights. Your secure and simple tool to edit PDF.',
 });
 
 const DOWNLOAD_SCREEN_PROPS = Object.freeze({
