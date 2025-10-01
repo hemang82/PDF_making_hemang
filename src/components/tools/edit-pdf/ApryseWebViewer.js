@@ -77,62 +77,62 @@ export default function WebViewer({
           UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
         } else if (pathname === '/tools/compare-pdf') {
           // Disable unnecessary UI items
-          UI.disableElements([
-            'toolbarGroup-Annotate',
-            'toolbarGroup-Shapes',
-            'toolbarGroup-Edit',
-            'toolbarGroup-Insert',
-            'toolbarGroup-Forms',
-            'toolbarGroup-FillAndSign',
-            'toolbarGroup-Redact',
-            'menuButton',
-            'downloadButton',
-            'searchButton',
-            'viewControlsButton',
-            'contextMenuPopup',
-            'leftPanelButton'
-          ]);
-          // Enable MultiViewer mode
-          UI.openElements(['comparePanel']);
-          UI.enableFeatures([UI.Feature.MultiViewerMode]);
-          UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
-          
-          UI.addEventListener(UI.Events.MULTI_VIEWER_READY, () => {
-            const [documentViewer1, documentViewer2] = Core.getDocumentViewers();
-            // ✅ Optionally, open Compare panel automatically
-            instance.UI.openElements(['comparePanel']);
+          // UI.disableElements([
+          //   'toolbarGroup-Annotate',
+          //   'toolbarGroup-Shapes',
+          //   'toolbarGroup-Edit',
+          //   'toolbarGroup-Insert',
+          //   'toolbarGroup-Forms',
+          //   'toolbarGroup-FillAndSign',
+          //   'toolbarGroup-Redact',
+          //   'menuButton',
+          //   'downloadButton',
+          //   'searchButton',
+          //   'viewControlsButton',
+          //   'contextMenuPopup',
+          //   'leftPanelButton'
+          // ]);
+          // // Enable MultiViewer mode
+          // UI.openElements(['comparePanel']);
+          // UI.enableFeatures([UI.Feature.MultiViewerMode]);
+          // UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
 
-            const startCompare = async () => {
-              const shouldCompare = documentViewer1.getDocument() && documentViewer2.getDocument();
-              // if (shouldCompare) {
-              //   // ✅ Use the right Color API (works in WebViewer 10+)
-              //   const beforeColor = new Annotations.Color(21, 205, 131, 0.4);
-              //   const afterColor = new Annotations.Color(255, 73, 73, 0.4);
+          // UI.addEventListener(UI.Events.MULTI_VIEWER_READY, () => {
+          //   const [documentViewer1, documentViewer2] = Core.getDocumentViewers();
+          //   // ✅ Optionally, open Compare panel automatically
+          //   instance.UI.openElements(['comparePanel']);
 
-              //   const options = { beforeColor, afterColor };
-              //   await documentViewer1.startSemanticDiff(documentViewer2, options);
+          //   const startCompare = async () => {
+          //     const shouldCompare = documentViewer1.getDocument() && documentViewer2.getDocument();
+          //     // if (shouldCompare) {
+          //     //   // ✅ Use the right Color API (works in WebViewer 10+)
+          //     //   const beforeColor = new Annotations.Color(21, 205, 131, 0.4);
+          //     //   const afterColor = new Annotations.Color(255, 73, 73, 0.4);
 
-              //   // ✅ Switch to Compare Pages layout automatically
-              //   UI.setLayoutMode(UI.LayoutMode.Compare);
-              // }
-            };
+          //     //   const options = { beforeColor, afterColor };
+          //     //   await documentViewer1.startSemanticDiff(documentViewer2, options);
 
-            // Attach events for when docs are loaded
-            documentViewer1.addEventListener('documentLoaded', startCompare);
-            documentViewer2.addEventListener('documentLoaded', startCompare);
+          //     //   // ✅ Switch to Compare Pages layout automatically
+          //     //   UI.setLayoutMode(UI.LayoutMode.Compare);
+          //     // }
+          //   };
 
-            // Load PDFs (replace with your dynamic values if needed)
-            documentViewer1.loadDocument(
-              'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
-              { filename: 'first.pdf' }
-            );
+          //   // Attach events for when docs are loaded
+          //   documentViewer1.addEventListener('documentLoaded', startCompare);
+          //   documentViewer2.addEventListener('documentLoaded', startCompare);
 
-            documentViewer2.loadDocument(
-              'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
-              { filename: 'second.pdf' }
-            );
+          //   // Load PDFs (replace with your dynamic values if needed)
+          //   documentViewer1.loadDocument(
+          //     'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
+          //     { filename: 'first.pdf' }
+          //   );
 
-          });
+          //   documentViewer2.loadDocument(
+          //     'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
+          //     { filename: 'second.pdf' }
+          //   );
+
+          // });
         }
         else if (pathname === '/tools/organize-pdf') {
           //  ✅ Organize PDF Code

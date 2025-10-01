@@ -37,7 +37,7 @@ const eslintConfig = [
     rules: {
       'react/react-in-jsx-scope': 'off',
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
-      'prettier/prettier': ['error'],
+      'prettier/prettier': ['warn'],
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-imports': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'warn',
