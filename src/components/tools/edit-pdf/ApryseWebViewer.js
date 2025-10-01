@@ -176,8 +176,8 @@ export default function WebViewer({
           // ✅ Edit PDF Code
           UI.disableElements([
             'toolbarGroup-View',
-            'toolbarGroup-Annotate',
-            'toolbarGroup-Shapes',
+            // 'toolbarGroup-Annotate',
+            // 'toolbarGroup-Shapes',
             'toolbarGroup-Edit',
             'toolbarGroup-Insert',
             'toolbarGroup-Forms',
