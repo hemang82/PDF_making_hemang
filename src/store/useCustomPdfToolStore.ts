@@ -148,7 +148,6 @@ export const useCustomPdfToolStore = create<CustomPdfToolState>()(
       iLovePdfDownloadInfo: null,
       setILovePdfDownloadInfo: (iLovePdfDownloadInfo) => set({ iLovePdfDownloadInfo }),
 
-
       // Implementation of the missing clearAllFiles method
       clearAllFiles: () =>
         set({

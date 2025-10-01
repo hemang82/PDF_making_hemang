@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, type JSX } from 'react';
 
 export default function EditPdf(): JSX.Element {
-
   const pathname = usePathname();
   const viewer = useRef(null);
 
@@ -50,7 +49,6 @@ export default function EditPdf(): JSX.Element {
       instance.docViewer.addEvent('documentloaded', () => {
         console.log('ComPDFKit Web Demo loaded');
       });
-
     });
   }, [pathname]);
 

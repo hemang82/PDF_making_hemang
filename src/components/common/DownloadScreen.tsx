@@ -64,7 +64,6 @@ const CustomDownloadScreen = ({
 
   const handleCustomDownload = async () => {
     try {
-
       const url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${processedFileName}`;
       const response = await fetch(url);
 
@@ -131,7 +130,6 @@ const CustomDownloadScreen = ({
 
   const handleApryseDownload = async () => {
     try {
-
       console.log('downloadInfodownloadInfo', downloadInfo);
 
       // const url = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}${processedFileName}`;
@@ -161,7 +159,6 @@ const CustomDownloadScreen = ({
       URL.revokeObjectURL(blobUrl);
 
       toast.success('Download completed successfully!');
-
     } catch (error) {
       console.error('Custom download failed:', error);
       toast.error('Download failed. Please try again.');
@@ -178,7 +175,7 @@ const CustomDownloadScreen = ({
       } else if (apiType === 'ilovepdf') {
         await handleIlovepdfDownload();
       } else if (apiType === 'apryse') {
-        await handleApryseDownload()
+        await handleApryseDownload();
       } else {
         await handleCustomDownload();
       }
@@ -188,8 +185,6 @@ const CustomDownloadScreen = ({
       setIsDownloading(false);
     }
   };
-
-
 
   const handleBackClick = () => {
     // Reload the page to go back to upload screen

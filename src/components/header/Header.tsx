@@ -121,11 +121,9 @@ const Header = (): JSX.Element | null => {
   return (
     <>
       <header className='shadow-custom-sm sticky top-0 z-50 bg-white'>
-
         {/* Top Bar */}
         <div className='bg-brand-slate-800'>
           <MyContainer className='flex items-center justify-between py-2.5 text-white'>
-
             <div>
               <a href='#' className='text-[12px]/[14.82px] font-bold'>
                 Term of Use
@@ -144,7 +142,6 @@ const Header = (): JSX.Element | null => {
 
         {/* Main Header */}
         <MyContainer className='flex items-center justify-between py-7'>
-
           {/* Logo */}
           <a href='/' aria-label='PDF Making home' className='relative h-[35px] w-[175px] xl:h-[45px] xl:w-[210px]'>
             <Image priority src='/pdfmaking-logo.svg' alt='PDFMaking logo' fill />

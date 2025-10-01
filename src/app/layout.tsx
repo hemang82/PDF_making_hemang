@@ -101,7 +101,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        
         <Header />
 
         <main role='main'>{children}</main>

@@ -51,7 +51,6 @@ const DOWNLOAD_SCREEN_PROPS = Object.freeze({
 ---------------------------------------------------------------*/
 
 const MergePdfClient = (): JSX.Element => {
-
   const screenType = useCustomPdfToolStore((state) => state.screenType);
 
   const renderScreen = (): JSX.Element => {
@@ -64,12 +63,10 @@ const MergePdfClient = (): JSX.Element => {
 
       default:
         return <CustomUploadScreen {...UPLOAD_SCREEN_PROPS} />;
-        
     }
   };
 
   return <PageSection>{renderScreen()}</PageSection>;
-
 };
 
 export default MergePdfClient;

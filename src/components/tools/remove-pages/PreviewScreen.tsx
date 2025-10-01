@@ -53,11 +53,10 @@ const PdfPage = ({ file, pageNumber, isMarkedForRemoval = false, onToggle, showC
   return (
     <div className='relative'>
       <div
-        className={`group relative flex h-[191.28px] w-[166.63px] items-center rounded-md px-[43px] py-[39px] transition-all duration-100 ${
-          isMarkedForRemoval
-            ? 'bg-red-50 outline-2 outline-red-500'
-            : 'bg-brand-slate-50 hover:outline-brand-primary outline-transparent hover:outline'
-        }`}
+        className={`group relative flex h-[191.28px] w-[166.63px] items-center rounded-md px-[43px] py-[39px] transition-all duration-100 ${isMarkedForRemoval
+          ? 'bg-red-50 outline-2 outline-red-500'
+          : 'bg-brand-slate-50 hover:outline-brand-primary outline-transparent hover:outline'
+          }`}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex={showCheckbox ? 0 : -1}
@@ -144,22 +143,20 @@ const RemovePagesMode = ({
         <button
           onClick={onSelectAll}
           disabled={isAllSelected}
-          className={`flex-1 cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition ${
-            isAllSelected
-              ? 'cursor-not-allowed border bg-gray-300 text-gray-600'
-              : 'border border-white text-white hover:bg-white hover:text-[#00B5D7]'
-          }`}
+          className={`flex-1 cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition ${isAllSelected
+            ? 'cursor-not-allowed border bg-gray-300 text-gray-600'
+            : 'border border-white text-white hover:bg-white hover:text-[#00B5D7]'
+            }`}
         >
           Select All
         </button>
         <button
           onClick={onClearAll}
           disabled={isNoneSelected}
-          className={`flex-1 cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition ${
-            isNoneSelected
-              ? 'cursor-not-allowed border bg-gray-300 text-gray-600'
-              : 'border border-white text-white hover:bg-white hover:text-[#00B5D7]'
-          }`}
+          className={`flex-1 cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition ${isNoneSelected
+            ? 'cursor-not-allowed border bg-gray-300 text-gray-600'
+            : 'border border-white text-white hover:bg-white hover:text-[#00B5D7]'
+            }`}
         >
           Clear All
         </button>
@@ -484,6 +481,7 @@ const RemovePagesPreviewScreen = ({
       toast.error(`Failed to process files. Please refresh and try again.`);
       throw error;
     }
+    
   };
 
   // Handle process

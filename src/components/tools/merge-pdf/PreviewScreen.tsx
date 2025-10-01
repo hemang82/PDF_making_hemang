@@ -140,7 +140,18 @@ interface PreviewScreenProps {
   toolName: string;
 }
 
-const PreviewScreen = ({ heading, buttonLabel, accept, multiple, isCheckPdfPasswordProtected, filesLimit, maxFileSizePerTaskInBytes, fileNameAddOn, tool, toolName }: PreviewScreenProps): JSX.Element => {
+const PreviewScreen = ({
+  heading,
+  buttonLabel,
+  accept,
+  multiple,
+  isCheckPdfPasswordProtected,
+  filesLimit,
+  maxFileSizePerTaskInBytes,
+  fileNameAddOn,
+  tool,
+  toolName,
+}: PreviewScreenProps): JSX.Element => {
   const uploadedFiles = useCustomPdfToolStore((state) => state.uploadedFiles);
   const setScreenType = useCustomPdfToolStore((state) => state.setScreenType);
   const removeUploadedFile = useCustomPdfToolStore((state) => state.removeUploadedFile);
@@ -429,7 +440,6 @@ const PreviewScreen = ({ heading, buttonLabel, accept, multiple, isCheckPdfPassw
                   />
                 ) : null}
               </DragOverlay>
-              
             </DndContext>
 
             {uploadedFiles.length === 0 && <EmptyPdfPlaceholder />}

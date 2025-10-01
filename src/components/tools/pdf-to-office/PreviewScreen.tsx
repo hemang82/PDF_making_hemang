@@ -133,7 +133,6 @@ const PreviewScreen = ({
       // Navigate to download screen
       setScreenType('download');
       toast.success(`PDF converted to ${formatName} successfully!`);
-
     } catch (error) {
       console.error('PDF conversion error:', error);
       toast.error(error instanceof Error ? error.message : `Failed to convert PDF to ${formatName}. Please try again.`);

@@ -60,11 +60,19 @@ export class PDFConversionService {
     assetID: string,
     options: ConversionOptions
   ): Promise<string> {
-    const requestBody: any = {
-      assetID: assetID,
+    // const requestBody: any = {
+    //   assetID: assetID,
+    //   targetFormat: options.targetFormat,
+    // };
+
+    const requestBody: {
+      assetID: string;
+      targetFormat: string;
+      ocrLang?: string;
+    } = {
+      assetID,
       targetFormat: options.targetFormat,
     };
-
     if (options.ocrEnabled) {
       requestBody.ocrLang = options.ocrLang || 'en-US';
     }
