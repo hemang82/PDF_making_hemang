@@ -21,7 +21,8 @@ const eslintConfig = [
     'plugin:jsx-a11y/recommended'
   ),
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    // files: ['**/*.ts', '**/*.tsx', '**/*.js'],
+    files: ['**/*.ts', '**/*.tsx', 'src/**/*.js'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {

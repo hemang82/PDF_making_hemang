@@ -39,6 +39,7 @@ export const metadata: Metadata = {
 /*---------------------------------------------------------------
                       Edit PDF Page Component
 ---------------------------------------------------------------*/
+
 export default function EditPdfPage(): JSX.Element {
   return <EditPdfClient />;
 }

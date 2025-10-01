@@ -7,6 +7,7 @@ import CustomDownloadScreen from '@/components/common/DownloadScreen';
 import CustomUploadScreen from '@/components/common/UploadScreen';
 import PageSection from '@/components/common/PageSection';
 import { useCustomPdfToolStore } from '@/store/useCustomPdfToolStore';
+import ApryseWebViewer from '@/components/tools/edit-pdf/ApryseWebViewer.js';
 
 const PreviewScreen = dynamic(() => import('@/components/tools/merge-pdf/CustomAPIPreviewScreen'), { ssr: false });
 
@@ -33,11 +34,16 @@ const PREVIEW_SCREEN_PROPS = Object.freeze({
   ...CONFIG_PROPS,
   heading: 'Sign PDF',
   buttonLabel: 'Save Signed PDF',
+  fileNameAddOn: 'Sign',
+  tool: 'Sign',
+  toolName: 'Sign PDF',
 });
 
 const DOWNLOAD_SCREEN_PROPS = Object.freeze({
   pageHeading: 'PDF Has Been Signed!',
   buttonLabel: 'Download Signed PDF',
+  apiType: 'apryse',
+  fileNameAddOn: 'sign',
 });
 
 /*---------------------------------------------------------------
@@ -49,7 +55,8 @@ const SignPdfClient = (): JSX.Element => {
   const renderScreen = (): JSX.Element => {
     switch (screenType) {
       case 'preview':
-        return <PreviewScreen {...PREVIEW_SCREEN_PROPS} />;
+        // return <PreviewScreen {...PREVIEW_SCREEN_PROPS} />;
+        return <ApryseWebViewer {...PREVIEW_SCREEN_PROPS} />;
 
       case 'download':
         return <CustomDownloadScreen {...DOWNLOAD_SCREEN_PROPS} />;

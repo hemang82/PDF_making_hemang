@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { type JSX } from 'react';
 // import SignPdfClient from '@/app/tools/sign-pdf/SignPdfClient'; // This file integrated with custom python backend
 import EditPdf from '@/components/tools/edit-pdf/EditPdf';
+import SignPdfClient from './SignPdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
@@ -48,5 +49,6 @@ export const metadata: Metadata = {
                       Sign PDF Page Component
 ---------------------------------------------------------------*/
 export default function SignPdfPage(): JSX.Element {
-  return <EditPdf />;
+  // return <EditPdf />;
+  return <SignPdfClient />;
 }

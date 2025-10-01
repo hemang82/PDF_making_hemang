@@ -154,24 +154,41 @@ export default function WebViewer({
           UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
           UI.enableElements(['toolMenu-Compare']);
         } else if (pathname === '/tools/sign-pdf') {
-          UI.setToolbarGroup(UI.ToolbarGroup.FILL_AND_SIGN);
+          // ✅ Sign PDF Code
+          UI.disableElements([
+            'toolbarGroup-View',
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            // 'toolbarGroup-FillAndSign',
+            'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            'leftPanelButton',
+            'contextMenuPopup',
+          ]);
+          UI.setToolbarGroup(UI.ToolbarGroup?.FILL_AND_SIGN);
         } else {
           // ✅ Edit PDF Code
           UI.disableElements([
-            // 'toolbarGroup-View',
-            // 'toolbarGroup-Annotate',
-            // 'toolbarGroup-Shapes',
-            // 'toolbarGroup-Edit',
-            // 'toolbarGroup-Insert',
-            // 'toolbarGroup-Forms',
-            // 'toolbarGroup-FillAndSign',
-            // 'toolbarGroup-Redact',
-            // 'menuButton',
-            // 'downloadButton',
-            // 'searchButton',
-            // 'viewControlsButton',
-            // 'leftPanelButton',
-            // 'contextMenuPopup',
+            'toolbarGroup-View',
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            'toolbarGroup-FillAndSign',
+            'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            'leftPanelButton',
+            'contextMenuPopup',
           ]);
 
           UI.enableFeatures([UI.Feature.ContentEdit]);
@@ -197,7 +214,7 @@ export default function WebViewer({
           // ]);
           // UI.setToolbarGroup(UI.ToolbarGroup?.FILL_AND_SIGN);
 
-          // //  ✅ Sign PDF Code
+          // //  ✅ Reduction PDF Code
           // UI.disableElements([
           //     // 'toolbarGroup-View',
           //     'toolbarGroup-Annotate',
@@ -346,7 +363,6 @@ export default function WebViewer({
       processedFileUrl: blob,
       processedFileName: 'edit-pdf.pdf',
     });
-
     setScreenType('download');
 
     // const link = document.createElement('a');
