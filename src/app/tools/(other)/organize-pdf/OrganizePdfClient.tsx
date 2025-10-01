@@ -43,6 +43,7 @@ const DOWNLOAD_SCREEN_PROPS = Object.freeze({
 /*---------------------------------------------------------------
                       Organize PDF Client Component
 ---------------------------------------------------------------*/
+
 const OrganizePdfClient = (): JSX.Element => {
   const screenType = useCustomPdfToolStore((state) => state.screenType);
 
@@ -51,7 +52,7 @@ const OrganizePdfClient = (): JSX.Element => {
       case 'preview':
         return <PreviewScreen {...PREVIEW_SCREEN_PROPS} />;
 
-      case 'download':
+        case 'download':
         return <CustomDownloadScreen {...DOWNLOAD_SCREEN_PROPS} />;
 
       default:

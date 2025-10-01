@@ -1,6 +1,7 @@
 'use client';
 
 import ActionSidebar from '@/components/tool/ActionSidebar';
+import ProcessingOverlay from '@/components/tool/ProcessingOverlay';
 import { useCustomPdfToolStore } from '@/store/useCustomPdfToolStore';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -27,109 +28,23 @@ export default function WebViewer({
   const setDownloadInfo = useCustomPdfToolStore((state) => state.setDownloadInfo);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [isProcessing, setIsProcessing] = useState(false);
-
-  // documentViewer.addEventListener('documentLoaded', () => {
-  // instance.UI.disableElements([
-  //     'toolbarGroup-View',
-  //     'toolbarGroup-Annotate',
-  //     'toolbarGroup-Edit',
-  //     'toolbarGroup-FillAndSign',
-  //     'toolbarGroup-Insert',
-  //     'toolbarGroup-Forms',
-  //     'toolbarGroup-Measure',
-  //     'toolbarGroup-Crop',
-  //     'toolbarGroup-Redact',
-  //     'toolbarGroup-Shapes',
-  //     'toolbarGroup-EditText',
-  //     'toolbarGroup-BuildForm',
-  //     'menuButton'
-  // ]);
-  // });
-
-  // useEffect(() => {
-  //     console.log('uploadedFiles[0]?.previewFileUrl', uploadedFiles[0]?.previewFileUrl);
-
-  //     import('@pdftron/webviewer').then((module) => {
-  //         const WebViewer = module.default;
-  //         WebViewer(
-  //             {
-  //                 path: '/lib/webviewer',
-  //                 licenseKey: 'demo:1758799091628:605b7e4e03000000006a989fd2cfdabd6615ce89a05dcee4da85e10372',
-  //                 initialDoc: uploadedFiles[0] ? uploadedFiles[0].previewFileUrl : 'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
-  //             },
-  //             viewer.current,
-  //         ).then((instance) => {
-
-  //             const { UI, Core } = instance;
-  //             const { documentViewer } = instance.Core;
-
-  //             instanceRef.current = instance;
-
-  //             // ✅ Load PDF dynamically after init
-  //             if (uploadedFiles[0]?.previewFileUrl) {
-  //                 const blobUrl = uploadedFiles[0].previewFileUrl;
-  //                 // For a URL (Blob or HTTP), use loadDocument:
-  //                 Core.documentViewer.loadDocument(blobUrl, { filename: uploadedFiles[0].name });
-  //             }
-
-  //             // ✅ Enable specific features
-  //             instance.UI.enableFeatures([instance.UI.Feature.ContentEdit, UI.ToolbarGroup?.ANNOTATE, UI.ToolbarGroup?.SHAPES]);
-  //             // instance.UI.enableElements(['readerPageTransitionButton']);
-
-  //             UI.openElements(['leftPanel']);
-
-  //             // ✅ Also reinforce disabling after doc load
-  //             documentViewer.addEventListener('documentLoaded', () => {
-
-  //                 // ✅ Disable unwanted elements right after initialization
-  //                 console.log('Load SDK');
-
-  //                 UI.disableElements([
-  //                     UI.ToolbarGroup?.EDIT,
-  //                     // UI.ToolbarGroup?.ANNOTATE,
-  //                     UI.ToolbarGroup?.FILL_AND_SIGN,
-  //                     UI.ToolbarGroup?.FORMS,
-  //                     UI.ToolbarGroup?.VIEW,
-  //                     // UI.ToolbarGroup?.SHAPES,
-  //                     UI.ToolbarGroup?.INSERT,
-  //                     "menuButton"
-  //                 ]);
-  //             });
-
-  //             // 👉 Instead of enableElements, use setToolbarGroup
-  //             if (pathname === '/tools/redact-pdf') {
-  //                 UI.setToolbarGroup(UI.ToolbarGroup.REDACT);
-  //             } else if (pathname === '/tools/compare-pdf') {
-  //                 UI.setToolbarGroup(UI.ToolbarGroup.VIEW); // base group
-  //                 UI.enableElements(['toolMenu-Compare']);  // selectively add compare
-  //             } else if (pathname === '/tools/sign-pdf') {
-  //                 UI.setToolbarGroup(UI.ToolbarGroup.FILL_AND_SIGN);
-  //             } else {
-  //                 UI.setToolbarGroup(UI.ToolbarGroup.VIEW); // default
-  //             }
-  //         });
-  //     });
-  // }, [pathname]);
+  const [processingMessage, setProcessingMessage] = useState('Processing...');
 
   useEffect(() => {
     import('@pdftron/webviewer').then((module) => {
       const WebViewer = module.default;
-      WebViewer(
-        {
-          path: '/lib/webviewer',
-          licenseKey: 'demo:1758799091628:605b7e4e03000000006a989fd2cfdabd6615ce89a05dcee4da85e10372',
-          initialDoc:
-            uploadedFiles?.length > 0
-              ? uploadedFiles[0]?.previewFileUrl
-              : 'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
-        },
-        viewer.current
-      ).then((instance) => {
-        const { UI, Core } = instance;
-        const { documentViewer } = Core;
-
+      WebViewer({
+        path: '/lib/webviewer',
+        licenseKey: 'demo:1758799091628:605b7e4e03000000006a989fd2cfdabd6615ce89a05dcee4da85e10372',
+        initialDoc: uploadedFiles?.length > 0 ? uploadedFiles[0]?.previewFileUrl : 'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
+        fullAPI: true,
+      }, viewer.current).then((instance) => {
         instanceRef.current = instance;
+        const { UI, Core } = instance;
+        const { documentViewer, Annotations } = Core;
+        const { Color } = Annotations;
 
         // ✅ Load document dynamically
         if (uploadedFiles[0]?.previewFileUrl) {
@@ -138,22 +53,127 @@ export default function WebViewer({
           });
         }
 
-        // // ✅ Disable unwanted elements right away
-        // UI.disableElements([
-        //     UI.ToolbarGroup?.EDIT,
-        //     UI.ToolbarGroup?.FILL_AND_SIGN,
-        //     UI.ToolbarGroup?.FORMS,
-        //     UI.ToolbarGroup?.VIEW,
-        //     UI.ToolbarGroup?.INSERT,
-        //     "menuButton",
-        // ]);
-
         // ✅ Set correct toolbar group based on route
         if (pathname === '/tools/redact-pdf') {
-          UI.setToolbarGroup(UI.ToolbarGroup.REDACT);
-        } else if (pathname === '/tools/compare-pdf') {
+          // ✅ Reduction PDF Code
+          instance.Core.annotationManager.enableRedaction();
+          UI.disableElements([
+            // 'toolbarGroup-View',
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            'toolbarGroup-FillAndSign',
+            // 'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            // 'leftPanelButton',
+            'contextMenuPopup',
+          ]);
+          UI.enableFeatures([UI.Feature.Redaction]);
           UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
-          UI.enableElements(['toolMenu-Compare']);
+        } else if (pathname === '/tools/compare-pdf') {
+          // Disable unnecessary UI items
+          UI.disableElements([
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            'toolbarGroup-FillAndSign',
+            'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            'contextMenuPopup',
+            'leftPanelButton'
+          ]);
+          // Enable MultiViewer mode
+          UI.openElements(['comparePanel']);
+          UI.enableFeatures([UI.Feature.MultiViewerMode]);
+          UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
+          
+          UI.addEventListener(UI.Events.MULTI_VIEWER_READY, () => {
+            const [documentViewer1, documentViewer2] = Core.getDocumentViewers();
+            // ✅ Optionally, open Compare panel automatically
+            instance.UI.openElements(['comparePanel']);
+
+            const startCompare = async () => {
+              const shouldCompare = documentViewer1.getDocument() && documentViewer2.getDocument();
+              // if (shouldCompare) {
+              //   // ✅ Use the right Color API (works in WebViewer 10+)
+              //   const beforeColor = new Annotations.Color(21, 205, 131, 0.4);
+              //   const afterColor = new Annotations.Color(255, 73, 73, 0.4);
+
+              //   const options = { beforeColor, afterColor };
+              //   await documentViewer1.startSemanticDiff(documentViewer2, options);
+
+              //   // ✅ Switch to Compare Pages layout automatically
+              //   UI.setLayoutMode(UI.LayoutMode.Compare);
+              // }
+            };
+
+            // Attach events for when docs are loaded
+            documentViewer1.addEventListener('documentLoaded', startCompare);
+            documentViewer2.addEventListener('documentLoaded', startCompare);
+
+            // Load PDFs (replace with your dynamic values if needed)
+            documentViewer1.loadDocument(
+              'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
+              { filename: 'first.pdf' }
+            );
+
+            documentViewer2.loadDocument(
+              'https://apryse.s3.amazonaws.com/public/files/samples/WebviewerDemoDoc.pdf',
+              { filename: 'second.pdf' }
+            );
+
+          });
+        }
+        else if (pathname === '/tools/organize-pdf') {
+          //  ✅ Organize PDF Code
+          UI.disableElements([
+            // 'toolbarGroup-View',
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            'toolbarGroup-FillAndSign',
+            'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            // 'leftPanelButton',
+            'contextMenuPopup',
+          ]);
+          // UI.enableElements(['cropButton']);
+          UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
+        } else if (pathname === '/tools/crop-pdf') {
+          //  ✅ Crop PDF Code
+          UI.disableElements([
+            // 'toolbarGroup-View',
+            'toolbarGroup-Annotate',
+            'toolbarGroup-Shapes',
+            // 'toolbarGroup-Edit',
+            'toolbarGroup-Insert',
+            'toolbarGroup-Forms',
+            'toolbarGroup-FillAndSign',
+            // 'toolbarGroup-Redact',
+            'menuButton',
+            'downloadButton',
+            'searchButton',
+            'viewControlsButton',
+            // 'leftPanelButton',
+            'contextMenuPopup',
+          ]);
+          UI.enableElements(['cropButton']);
+          UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
         } else if (pathname === '/tools/sign-pdf') {
           // ✅ Sign PDF Code
           UI.disableElements([
@@ -195,65 +215,6 @@ export default function WebViewer({
           UI.enableFeatures([UI.Feature.ContentEdit]);
           UI.setToolbarGroup(UI.ToolbarGroup.SHAPES);
           UI.setToolbarGroup(UI.ToolbarGroup.ANNOTATE);
-
-          // ✅ Sign PDF Code
-          // UI.disableElements([
-          //     'toolbarGroup-View',
-          //     'toolbarGroup-Annotate',
-          //     'toolbarGroup-Shapes',
-          //     'toolbarGroup-Edit',
-          //     'toolbarGroup-Insert',
-          //     'toolbarGroup-Forms',
-          //     // 'toolbarGroup-FillAndSign',
-          //     'toolbarGroup-Redact',
-          //     'menuButton',
-          //     'downloadButton',
-          //     'searchButton',
-          //     'viewControlsButton',
-          //     'leftPanelButton',
-          //     'contextMenuPopup',
-          // ]);
-          // UI.setToolbarGroup(UI.ToolbarGroup?.FILL_AND_SIGN);
-
-          // //  ✅ Reduction PDF Code
-          // UI.disableElements([
-          //     // 'toolbarGroup-View',
-          //     'toolbarGroup-Annotate',
-          //     'toolbarGroup-Shapes',
-          //     'toolbarGroup-Edit',
-          //     'toolbarGroup-Insert',
-          //     'toolbarGroup-Forms',
-          //     'toolbarGroup-FillAndSign',
-          //     // 'toolbarGroup-Redact',
-          //     'menuButton',
-          //     'downloadButton',
-          //     'searchButton',
-          //     'viewControlsButton',
-          //     // 'leftPanelButton',
-          //     'contextMenuPopup',
-          // ]);
-          // UI.enableFeatures([UI.Feature.Redaction]);
-          // UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
-
-          // //  ✅ Crop PDF Code
-          // UI.disableElements([
-          //     // 'toolbarGroup-View',
-          //     'toolbarGroup-Annotate',
-          //     'toolbarGroup-Shapes',
-          //     // 'toolbarGroup-Edit',
-          //     'toolbarGroup-Insert',
-          //     'toolbarGroup-Forms',
-          //     'toolbarGroup-FillAndSign',
-          //     // 'toolbarGroup-Redact',
-          //     'menuButton',
-          //     'downloadButton',
-          //     'searchButton',
-          //     'viewControlsButton',
-          //     // 'leftPanelButton',
-          //     'contextMenuPopup',
-          // ]);
-          // UI.enableElements(['cropButton']);
-          // UI.setToolbarGroup(UI.ToolbarGroup.VIEW);
 
           //  ✅ watermarkButton PDF Code
           // UI.disableElements([
@@ -305,30 +266,6 @@ export default function WebViewer({
         // ✅ Re-open after doc load
         documentViewer.addEventListener('documentLoaded', () => {
           console.log('Document loaded ✅');
-
-          UI.openElements(['leftPanel']);
-          UI.openElements(['thumbnailsPanel']);
-          // Hide multi-page input bar
-          UI.disableElements(['multiPageTab']);
-
-          // // Make sure watermark is available
-          // UI.enableElements(['watermarkButton']);
-          // // Switch to EDIT toolbar (where watermark lives)
-          // UI.setToolbarGroup(UI.ToolbarGroup.EDIT);
-          // // Open the watermark dialog directly
-          // UI.openElements(['watermarkPanel']);
-
-          // Force single-page selection only
-          // const thumbnailControl = documentViewer.getThumbnailControl();
-          // if (thumbnailControl) {
-          //     thumbnailControl.on('thumbnailSelected', (selectedPages) => {
-          //         if (selectedPages.length > 1) {
-          //             const lastPage = selectedPages[selectedPages.length - 1];
-          //             thumbnailControl.clearSelectedThumbnails();
-          //             thumbnailControl.selectThumbnail(lastPage);
-          //         }
-          //     });
-          // }
         });
       });
     });
@@ -336,7 +273,7 @@ export default function WebViewer({
 
   const handleDownload = async () => {
     const instance = instanceRef.current;
-
+    setIsProcessing(true)
     if (!instance) {
       console.error('WebViewer instance not ready yet');
       return;
@@ -364,7 +301,12 @@ export default function WebViewer({
       processedFileUrl: blob,
       processedFileName: 'edit-pdf.pdf',
     });
-    setScreenType('download');
+
+    // ⏳ Delay turning off processing
+    setTimeout(() => {
+      setIsProcessing(false);
+      setScreenType('download');
+    }, 1000);
 
     // const link = document.createElement('a');
     // link.href = URL.createObjectURL(blob);
@@ -372,11 +314,10 @@ export default function WebViewer({
     // link.click();
   };
 
-  console.log('uploadedFiles', uploadedFiles);
-
   return (
     <>
       <div className='flex'>
+
         <div
           className='webviewer'
           ref={viewer}
@@ -405,7 +346,11 @@ export default function WebViewer({
             <p className='mt-5 text-center text-sm text-white/80'>Select at least 2 PDF files to merge</p>
           )} */}
         </ActionSidebar>
+
       </div>
+
+      {/* Processing Overlay */}
+      <ProcessingOverlay isVisible={isProcessing} message={processingMessage} />
     </>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { type JSX } from 'react';
 // import RedactPdfClient from '@/app/tools/redact-pdf/RedactPdfClient'; // This file integrated with custom python backend
 import EditPdf from '@/components/tools/edit-pdf/EditPdf';
+import RedactPdfClient from './RedactPdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
@@ -47,5 +48,6 @@ export const metadata: Metadata = {
                       Redact PDF Page Component
 ---------------------------------------------------------------*/
 export default function RedactPdfPage(): JSX.Element {
-  return <EditPdf />;
+  // return <EditPdf />;
+  return <RedactPdfClient />
 }

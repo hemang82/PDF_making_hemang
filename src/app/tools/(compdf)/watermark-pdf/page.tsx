@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { type JSX } from 'react';
 // import WatermarkPdfClient from '@/app/tools/watermark-pdf/WatermarkPdfClient'; // This file integrated with custom python backend
 import EditPdf from '@/components/tools/edit-pdf/EditPdf';
+import WatermarkPdfClient from './WatermarkPdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
@@ -48,5 +49,7 @@ export const metadata: Metadata = {
                       Watermark PDF Page Component
 ---------------------------------------------------------------*/
 export default function WatermarkPdfPage(): JSX.Element {
-  return <EditPdf />;
+  // return <EditPdf />;
+  return <WatermarkPdfClient />;
+
 }

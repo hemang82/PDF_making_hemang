@@ -331,7 +331,6 @@ const PreviewScreen = ({
   // Handle process
   const handleProcess = async () => {
     setIsProcessing(true);
-
     try {
       // Step 1: Initialize the task
       setProcessingMessage('Initializing task...');

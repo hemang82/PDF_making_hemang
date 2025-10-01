@@ -74,12 +74,6 @@ export const PDF_TOOLS: PdfTool[] = [
     iconPath: '/images/home/pdf-tools/excel-to-pdf.svg',
   },
   {
-    title: 'Edit PDF',
-    description: 'Gain full editing control over any PDF document.',
-    href: '/tools/edit-pdf',
-    iconPath: '/images/home/pdf-tools/edit.svg',
-  },
-  {
     title: 'PDF to JPG',
     description: 'Convert PDF files into JPG images in seconds.',
     href: '/tools/pdf-to-jpg',
@@ -91,18 +85,6 @@ export const PDF_TOOLS: PdfTool[] = [
     href: '/tools/jpg-to-pdf',
     iconPath: '/images/home/pdf-tools/jpg-to-pdf.svg',
   },
-  {
-    title: 'Sign PDF',
-    description: 'Sign yourself or request electronic signatures from others.',
-    href: '/tools/sign-pdf',
-    iconPath: '/images/home/pdf-tools/sign.svg',
-  },
-  // {
-  //   title: 'Watermark PDF',
-  //   description: 'Add a watermark to a PDF file in seconds.',
-  //   href: '/tools/watermark-pdf',
-  //   iconPath: '/images/home/pdf-tools/watermark.svg',
-  // },
   {
     title: 'Rotate PDF',
     description: 'Change the orientation or rotate PDF pages in just one click.',
@@ -127,12 +109,6 @@ export const PDF_TOOLS: PdfTool[] = [
     href: '/tools/protect-pdf',
     iconPath: '/images/home/pdf-tools/protect.svg',
   },
-  // {
-  //   title: 'Organize PDF',
-  //   description: 'Rearrange, add, or delete PDF pages easily.',
-  //   href: '/tools/organize-pdf',
-  //   iconPath: '/images/home/pdf-tools/organize.svg',
-  // },
   {
     title: 'PDF to PDF/A',
     description: 'Convert your PDF to PDF/A for long-term, ISO-standardized archiving.',
@@ -157,12 +133,6 @@ export const PDF_TOOLS: PdfTool[] = [
     href: '/tools/remove-pages',
     iconPath: '/images/home/pdf-tools/ocr.svg',
   },
-  // {
-  //   title: 'Scan to PDF',
-  //   description: 'Scan documents on mobile and send them instantly to your browser.',
-  //   href: '/tools/scan-to-pdf',
-  //   iconPath: '/images/home/pdf-tools/scan-to-pdf.svg',
-  // },
   {
     title: 'OCR PDF',
     description: 'Convert scanned PDFs into searchable, selectable documents easily.',
@@ -170,10 +140,16 @@ export const PDF_TOOLS: PdfTool[] = [
     iconPath: '/images/home/pdf-tools/ocr.svg',
   },
   {
-    title: 'Compare PDF',
-    description: 'Compare documents side by side and spot changes easily.',
-    href: '/tools/compare-pdf',
-    iconPath: '/images/home/pdf-tools/compare.svg',
+    title: 'Edit PDF',
+    description: 'Gain full editing control over any PDF document.',
+    href: '/tools/edit-pdf',
+    iconPath: '/images/home/pdf-tools/edit.svg',
+  },
+  {
+    title: 'Sign PDF',
+    description: 'Sign yourself or request electronic signatures from others.',
+    href: '/tools/sign-pdf',
+    iconPath: '/images/home/pdf-tools/sign.svg',
   },
   {
     title: 'Redact PDF',
@@ -181,11 +157,35 @@ export const PDF_TOOLS: PdfTool[] = [
     href: '/tools/redact-pdf',
     iconPath: '/images/home/pdf-tools/redact.svg',
   },
+  {
+    title: 'Crop PDF',
+    description: 'Trim the edges of your PDF pages to remove unwanted margins.',
+    href: '/tools/crop-pdf',
+    iconPath: '/images/home/pdf-tools/compress.svg',
+  },
+  {
+    title: 'Organize PDF',
+    description: 'Rearrange, add, or delete PDF pages easily.',
+    href: '/tools/organize-pdf',
+    iconPath: '/images/home/pdf-tools/organize.svg',
+  },
   // {
-  //   title: 'Crop PDF',
-  //   description: 'Trim the edges of your PDF pages to remove unwanted margins.',
-  //   href: '/tools/crop-pdf',
-  //   iconPath: '/images/home/pdf-tools/compress.svg',
+  //   title: 'Watermark PDF',
+  //   description: 'Add a watermark to a PDF file in seconds.',
+  //   href: '/tools/watermark-pdf',
+  //   iconPath: '/images/home/pdf-tools/watermark.svg',
+  // },
+  // {
+  //   title: 'Scan to PDF',
+  //   description: 'Scan documents on mobile and send them instantly to your browser.',
+  //   href: '/tools/scan-to-pdf',
+  //   iconPath: '/images/home/pdf-tools/scan-to-pdf.svg',
+  // },
+  // {
+  //   title: 'Compare PDF',
+  //   description: 'Compare documents side by side and spot changes easily.',
+  //   href: '/tools/compare-pdf',
+  //   iconPath: '/images/home/pdf-tools/compare.svg',
   // },
 ];
 

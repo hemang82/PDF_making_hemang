@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { type JSX } from 'react';
 import OrganizePdfClient from '@/app/tools/(other)/organize-pdf/OrganizePdfClient';
+import OrganizeAprysePdfClient from './OrganizeAprysePdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
 ---------------------------------------------------------------*/
+
 export const metadata: Metadata = {
   title: `Organize PDF Pages - Free PDF Page Organizer | ${process.env.SITE_NAME}`,
-  description:
-    'Rearrange, delete, and organize PDF pages online instantly - reorder PDF pages for free with no signup required.',
+  description: 'Rearrange, delete, and organize PDF pages online instantly - reorder PDF pages for free with no signup required.',
   keywords: [
     'organize PDF',
     'rearrange PDF pages',
@@ -46,5 +47,5 @@ export const metadata: Metadata = {
                       Organize PDF Page Component
 ---------------------------------------------------------------*/
 export default function OrganizePdfPage(): JSX.Element {
-  return <OrganizePdfClient />;
+  return <OrganizeAprysePdfClient />;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { type JSX } from 'react';
 import EditPdf from '@/components/tools/edit-pdf/EditPdf';
+import CropPdfClient from './CropPdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
@@ -37,5 +38,7 @@ export const metadata: Metadata = {
                       Crop PDF Page Component
 ---------------------------------------------------------------*/
 export default function CropPdfPage(): JSX.Element {
-  return <EditPdf />;
+  // return <EditPdf />;
+  return <CropPdfClient />;
+
 }

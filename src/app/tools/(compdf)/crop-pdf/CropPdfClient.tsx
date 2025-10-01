@@ -9,49 +9,49 @@ import PageSection from '@/components/common/PageSection';
 import { useCustomPdfToolStore } from '@/store/useCustomPdfToolStore';
 import ApryseWebViewer from '@/components/tools/edit-pdf/ApryseWebViewer';
 
-const PreviewScreen = dynamic(() => import('@/components/tools/compare-pdf/PreviewScreen'), { ssr: false });
+const PreviewScreen = dynamic(() => import('@/components/tools/merge-pdf/CustomAPIPreviewScreen'), { ssr: false });
 
 /*---------------------------------------------------------------
                       Constant Prop Bundles
 ---------------------------------------------------------------*/
-const CONFIG_PROPS = {
+const CONFIG_PROPS = Object.freeze({
   accept: { 'application/pdf': ['.pdf'] },
   multiple: true,
   isCheckPdfPasswordProtected: true,
-  filesLimit: 2,
-  maxFileSizePerTaskInBytes: 50 * 1024 * 1024, // 50 MB
-};
+  filesLimit: 3,
+  maxFileSizePerTaskInBytes: 50 * 1024 * 1024, // 100 MB
+});
 
 const UPLOAD_SCREEN_PROPS = Object.freeze({
   ...CONFIG_PROPS,
-  title: 'Compare PDF Files',
-  description: 'Upload two PDF files to compare and find differences.',
-  buttonLabel: 'Select PDF files',
-  dropContainerLabel: 'or drop PDFs here',
+  title: 'Crop PDF',
+  description: 'Crop and trim PDF files easily and securely. Fast online PDF cropper with no watermark.',
+  buttonLabel: 'Select PDF file',
+  dropContainerLabel: 'or drop PDF here',
 });
 
 const PREVIEW_SCREEN_PROPS = Object.freeze({
   ...CONFIG_PROPS,
-  heading: 'Compare PDFs',
-  buttonLabel: 'Compare Files',
-  fileNameAddOn: 'Compare',
-  tool: 'Compare',
-  toolName: 'Compare PDF',
-  description: 'Compare PDF files easily and securely. Fast online PDF comparison tool with no watermark.',
+  heading: 'Crop PDF Content',
+  buttonLabel: 'Apply Crop PDF',
+  fileNameAddOn: 'Crop',
+  tool: 'Crop',
+  toolName: 'Crop PDF',
+  description: 'Crop and trim PDF files easily and securely. Fast online PDF cropper with no watermark.',
 });
 
 const DOWNLOAD_SCREEN_PROPS = Object.freeze({
-  pageHeading: 'PDF Comparison Complete!',
-  buttonLabel: 'Download Comparison Report',
+  pageHeading: 'PDF Has Been Crop!',
+  buttonLabel: 'Download Crop PDF',
+  apiType: 'apryse',
+  fileNameAddOn: 'Crop',
 });
 
 /*---------------------------------------------------------------
-                      Compare PDF Client Component
+                      Crop PDF Client Component
 ---------------------------------------------------------------*/
-
-const ComparePdfClient = (): JSX.Element => {
+const CropPdfClient = (): JSX.Element => {
   const screenType = useCustomPdfToolStore((state) => state.screenType);
-
   const renderScreen = (): JSX.Element => {
     switch (screenType) {
       case 'preview':
@@ -59,7 +59,6 @@ const ComparePdfClient = (): JSX.Element => {
         return <ApryseWebViewer {...PREVIEW_SCREEN_PROPS} />;
       case 'download':
         return <CustomDownloadScreen {...DOWNLOAD_SCREEN_PROPS} />;
-
       default:
         return <CustomUploadScreen {...UPLOAD_SCREEN_PROPS} />;
     }
@@ -68,4 +67,4 @@ const ComparePdfClient = (): JSX.Element => {
   return <PageSection>{renderScreen()}</PageSection>;
 };
 
-export default ComparePdfClient;
+export default CropPdfClient;

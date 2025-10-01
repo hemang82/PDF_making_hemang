@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { type JSX } from 'react';
 // import ComparePdfClient from '@/app/tools/compare-pdf/ComparePdfClient'; // This file integrated with custom python backend
 import EditPdf from '@/components/tools/edit-pdf/EditPdf';
+import ComparePdfClient from './ComparePdfClient';
 
 /*---------------------------------------------------------------
                       Full Per Page SEO Metadata
@@ -38,5 +39,7 @@ export const metadata: Metadata = {
                       Compare PDF Page Component
 ---------------------------------------------------------------*/
 export default function ComparePdfPage(): JSX.Element {
-  return <EditPdf />;
+  // return <EditPdf />;
+  return <ComparePdfClient />;
+
 }

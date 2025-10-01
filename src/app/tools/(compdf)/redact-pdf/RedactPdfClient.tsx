@@ -7,6 +7,7 @@ import CustomDownloadScreen from '@/components/common/DownloadScreen';
 import CustomUploadScreen from '@/components/common/UploadScreen';
 import PageSection from '@/components/common/PageSection';
 import { useCustomPdfToolStore } from '@/store/useCustomPdfToolStore';
+import ApryseWebViewer from '@/components/tools/edit-pdf/ApryseWebViewer';
 
 const PreviewScreen = dynamic(() => import('@/components/tools/merge-pdf/CustomAPIPreviewScreen'), { ssr: false });
 
@@ -33,11 +34,17 @@ const PREVIEW_SCREEN_PROPS = Object.freeze({
   ...CONFIG_PROPS,
   heading: 'Redact PDF Content',
   buttonLabel: 'Apply Redaction',
+  fileNameAddOn: 'Redact',
+  tool: 'Redact',
+  toolName: 'Redact PDF',
+  description: 'Securely remove or black out sensitive information from your PDF.',
 });
 
 const DOWNLOAD_SCREEN_PROPS = Object.freeze({
   pageHeading: 'PDF Has Been Redacted!',
   buttonLabel: 'Download Redacted PDF',
+  apiType: 'apryse',
+  fileNameAddOn: 'edit',
 });
 
 /*---------------------------------------------------------------
@@ -49,8 +56,8 @@ const RedactPdfClient = (): JSX.Element => {
   const renderScreen = (): JSX.Element => {
     switch (screenType) {
       case 'preview':
-        return <PreviewScreen {...PREVIEW_SCREEN_PROPS} />;
-
+        // return <PreviewScreen {...PREVIEW_SCREEN_PROPS} />;
+        return <ApryseWebViewer {...PREVIEW_SCREEN_PROPS} />;
       case 'download':
         return <CustomDownloadScreen {...DOWNLOAD_SCREEN_PROPS} />;
 
